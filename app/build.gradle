@@ -1,0 +1,121 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'realm-android'
+
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    flavorDimensions "default"
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+    defaultConfig {
+        applicationId "com.example.placebit"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        release {
+//            storeFile file("../keys/bluemoon.jks")
+//            storePassword "sdfsd78687kjwnsdf7"
+//            keyAlias "B.M."
+//            keyPassword "sdfsd78687kjwnsdf7"
+        }
+        debug {
+//            storeFile file("../keys/debug.keystore")
+        }
+    }
+    productFlavors {
+        prod {
+            signingConfig signingConfigs.release
+            buildConfigField "String", "BASE_URL", "\"https://bmsc.n00l.space/api/\""
+            buildConfigField "String", "UPLOAD_FILE_URL", "\"https://hologo-sources.s3.eu-west-2.amazonaws.com/\""
+            buildConfigField "String", "GOOGLE_PLACE_KEY", '"AIzaSyBPiyT7SsuT6sFUFvXtoI9bhGVjSmJJNLY"'
+        }
+        dev {
+            signingConfig signingConfigs.debug
+            buildConfigField "String", "BASE_URL", "\"https://bmsc.n00l.space/api/\""
+            buildConfigField "String", "UPLOAD_FILE_URL", "\"https://hologo-sources.s3.eu-west-2.amazonaws.com/\""
+            buildConfigField "String", "GOOGLE_PLACE_KEY", '"AIzaSyBPiyT7SsuT6sFUFvXtoI9bhGVjSmJJNLY"'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_1_8
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.drawerlayout:drawerlayout:1.0.0"
+    testImplementation 'junit:junit:4.12'
+
+    // Rx
+    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxandroid}"
+    implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxjava}"
+    implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.ext.rxkotlin}"
+
+    //Navigation components
+    implementation "androidx.navigation:navigation-fragment-ktx:${rootProject.ext.navigation}"
+    implementation "androidx.navigation:navigation-ui-ktx:${rootProject.ext.navigation}"
+
+    // Android Arch
+    implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.ext.lifecycle}"
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:${rootProject.ext.glide}"
+
+    // Gson
+    implementation "com.google.code.gson:gson:${rootProject.ext.gson}"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofit}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.login_interceptor}"
+    implementation "com.squareup.okhttp3:okhttp:${rootProject.ext.okhttp}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.ext.rxjava_adapter}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofit}"
+    implementation "com.basgeekball:awesome-validation:${rootProject.ext.awesomeValidation}"
+    implementation 'com.github.nikartm:image-support:1.0.5'
+
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+
+    implementation "com.annimon:stream:${rootProject.ext.stream}"
+
+    implementation "com.basgeekball:awesome-validation:${rootProject.ext.awesomeValidation}"
+
+    api "com.jakewharton.threetenabp:threetenabp:$rootProject.ext.threetenabp"
+
+    implementation "android.arch.paging:runtime:$rootProject.ext.paging"
+}

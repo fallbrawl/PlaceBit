@@ -1,0 +1,61 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="drawerArrowStyle">@style/DrawerIcon</item>
+    </style>
+
+    <style name="CircularProgress" parent="Theme.AppCompat.Light">
+        <item name="android:indeterminateTint">#5B9B9F</item>
+    </style>
+
+    <style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <style name="EventTypeTag">
+        <item name="android:background">@drawable/bg_event_type_tag</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="SaleTag">
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:background">@drawable/bg_sale_tag</item>
+    </style>
+
+    <style name="EventItemTitle">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="EventItemDesc">
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="EventItemAddress">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="EventItemDate">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="EventItemPrice">
+        <item name="android:textColor">@color/priceGreen</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+
+</resources>

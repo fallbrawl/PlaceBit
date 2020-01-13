@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">PlaceBit</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_internet_connection">No internet connection!</string>
+
+    <string name="Global_log_in">Log in</string>
+    <string name="Global_enter">Enter</string>
+    <string name="Global_login">Login</string>
+    <string name="Global_accept">Accept</string>
+    <string name="Global_reject">Reject</string>
+    <string name="Global_ok">OK</string>
+    <string name="Global_logout">Logout</string>
+
+    <string name="openDrawer">Open Drawer</string>
+    <string name="closeDrawer">Close Drawer</string>
+    <string name="EventItem_sale">sale</string>
+    <string name="EventsListFragment_all_events">All events</string>
+    <string name="Toolbar_search">Search</string>
+    <string name="Toolbar_filter">Filter</string>
+    <string name="Filter_select_category">Select Category</string>
+    <string name="Filter_choose_city">Choose City</string>
+    <string name="Filter_select_datas">Select Datas</string>
+    <string name="Filter_price">Price</string>
+    <string name="Filter_search">Search</string>
+</resources>

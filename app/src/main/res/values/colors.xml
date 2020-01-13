@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#5D1049</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="priceGreen">#66C95A</color>
+    <color name="soldoutRed">#E30425</color>
+    <color name="lightPink">#FBF2F5</color>
+    <color name="brightPink">#7B1B60</color>
+    <color name="hintColor">#80FFFFFF</color>
+</resources>
