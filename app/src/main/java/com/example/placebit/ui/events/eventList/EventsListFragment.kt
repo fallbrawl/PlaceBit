@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,9 +17,11 @@ import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import com.example.placebit.R
 import com.example.placebit.extensions.obtainViewModel
-import com.example.placebit.ui.events.eventScreen.EventFragment
+import com.example.placebit.ui.MainActivity
 import com.example.placebit.util.StateEnum
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_events_list.*
+
 
 class EventsListFragment : Fragment(), Toolbar.OnMenuItemClickListener {
 
@@ -59,18 +62,27 @@ class EventsListFragment : Fragment(), Toolbar.OnMenuItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val rootView: View = inflater.inflate(R.layout.fragment_events_list, container, false)
+        setHasOptionsMenu(true);
 
+        return rootView
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         val toolbar =
             activity!!.findViewById<View>(R.id.toolbar) as Toolbar
         toolbar.inflateMenu(R.menu.toolbar_menu)
         toolbar.setOnMenuItemClickListener(this)
-        return rootView
+        super.onCreateOptionsMenu(menu, inflater)
+
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
-
+        (activity as MainActivity?)!!.supportActionBar!!.show()
         getCurrentViewModel().apply {
             state.observe(this@EventsListFragment, Observer {
                 val mLayoutManager: RecyclerView.LayoutManager =
@@ -107,6 +119,7 @@ class EventsListFragment : Fragment(), Toolbar.OnMenuItemClickListener {
             })
             toEventDetails.observe(this@EventsListFragment, Observer {
                 val action = EventsListFragmentDirections.actionEventsListFragmentToEventFragment(it.id.toInt())
+                (activity as MainActivity).drawer_layout.closeDrawers()
                 findNavController().navigate(action)
             })
             addToFav.observe(this@EventsListFragment, Observer {

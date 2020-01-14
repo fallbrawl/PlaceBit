@@ -40,6 +40,13 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="EventDetailTitle">
+        <item name="android:textSize">22dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
     <style name="EventItemDesc">
         <item name="android:textSize">14dp</item>
     </style>
@@ -56,6 +63,23 @@
     <style name="EventItemPrice">
         <item name="android:textColor">@color/priceGreen</item>
         <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="EventDetailDesc"></style>
+
+    <style name="RedButton">
+        <item name="android:background">@drawable/bg_red_button</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="DaysRemainigValue">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="PriceValue">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/priceGreen</item>
     </style>
 
 </resources>

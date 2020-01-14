@@ -24,4 +24,9 @@
     <string name="Filter_select_datas">Select Datas</string>
     <string name="Filter_price">Price</string>
     <string name="Filter_search">Search</string>
+
+<!--    EventFragment-->
+    <string name="buy_ticket">Buy ticket</string>
+    <string name="price">Price:</string>
+    <string name="remaining">Remaining:</string>
 </resources>
