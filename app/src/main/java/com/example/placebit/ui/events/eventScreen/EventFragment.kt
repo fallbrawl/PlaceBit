@@ -13,11 +13,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_event.*
 
 
-/**
- * A simple [Fragment] subclass.
- */
 class EventFragment : Fragment() {
-
+    var fav: Boolean = true
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,8 +31,15 @@ class EventFragment : Fragment() {
             activity?.onBackPressed()
         }
 
-//        (activity as MainActivity?)!!.setSupportActionBar(toolbar)
+        imageViewFav.setOnClickListener {
+            fav = if (fav) {
+                imageViewFav.setImageDrawable(resources.getDrawable(R.drawable.ic_fav_deactivated))
+                false
+            } else {
+                imageViewFav.setImageDrawable(resources.getDrawable(R.drawable.ic_fav_active))
+                true
+            }
+
+        }
     }
-
-
 }
