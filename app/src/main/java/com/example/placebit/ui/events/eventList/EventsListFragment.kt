@@ -29,13 +29,16 @@ class EventsListFragment : Fragment(), Toolbar.OnMenuItemClickListener {
         return obtainViewModel(EventsListViewModel::class.java)
     }
 
-    private fun toggle(toggle:Boolean) {
+    private fun toggle(toggle: Boolean) {
         val transition: Transition = Slide(Gravity.TOP)
         transition.duration = 600
         transition.addTarget(R.id.filterContainer)
         TransitionManager.beginDelayedTransition(parentContainer, transition)
         filterContainer.visibility = if (toggle) View.VISIBLE else View.GONE
     }
+
+
+
 
     override fun onMenuItemClick(p0: MenuItem?): Boolean {
         when (p0?.itemId) {
@@ -77,33 +80,34 @@ class EventsListFragment : Fragment(), Toolbar.OnMenuItemClickListener {
 
     }
 
+    private fun initAdapter() {
+        val mLayoutManager: RecyclerView.LayoutManager =
+            LinearLayoutManager(context)
+        eventsList.layoutManager = mLayoutManager
+
+        eventsList.adapter = getCurrentViewModel().eventAdapter
+        val dividerItemDecoration =
+            DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        context?.let { con ->
+            dividerItemDecoration.setDrawable(
+                ContextCompat.getDrawable(
+                    con,
+                    R.drawable.divider_space
+                )!!
+            )
+        }
+        eventsList.addItemDecoration(dividerItemDecoration)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-
+        initAdapter()
         (activity as MainActivity?)!!.supportActionBar!!.show()
         getCurrentViewModel().apply {
             state.observe(this@EventsListFragment, Observer {
-                val mLayoutManager: RecyclerView.LayoutManager =
-                    LinearLayoutManager(context)
-                eventsList.layoutManager = mLayoutManager
-
-                eventsList.adapter = this.eventAdapter
-                val dividerItemDecoration =
-                    DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-                context?.let { con ->
-                    dividerItemDecoration.setDrawable(
-                        ContextCompat.getDrawable(
-                            con,
-                            R.drawable.divider_space
-                        )!!
-                    )
-                }
-                eventsList.addItemDecoration(dividerItemDecoration)
 
                 getEvents()
-
                 when (it) {
                     StateEnum.COMPLETE -> {
 
@@ -118,7 +122,8 @@ class EventsListFragment : Fragment(), Toolbar.OnMenuItemClickListener {
                 }
             })
             toEventDetails.observe(this@EventsListFragment, Observer {
-                val action = EventsListFragmentDirections.actionEventsListFragmentToEventFragment(it.id.toInt())
+                val action =
+                    EventsListFragmentDirections.actionEventsListFragmentToEventFragment(it.id.toInt())
                 (activity as MainActivity).drawer_layout.closeDrawers()
                 findNavController().navigate(action)
             })

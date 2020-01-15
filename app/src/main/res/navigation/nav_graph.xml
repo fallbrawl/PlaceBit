@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/eventFragment"
         android:name="com.example.placebit.ui.events.eventScreen.EventFragment"
-        android:label="fragment_event"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_event" >
         <argument
             android:name="lol"

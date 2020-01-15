@@ -14,7 +14,6 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.placebit.R
 import com.example.placebit.data.model.EventModel
-import com.example.placebit.ui.events.eventScreen.EventViewModel
 import kotlinx.android.synthetic.main.item_event.view.*
 
 
