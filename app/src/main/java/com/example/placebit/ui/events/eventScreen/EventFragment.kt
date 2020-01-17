@@ -27,6 +27,7 @@ class EventFragment : Fragment() {
     private var container: Boolean = false
     private lateinit var qrAdapter: QrCodesAdapter
     private val qrsList: ArrayList<QrCodeModel> = arrayListOf()
+    private var i = 1;
 
     private fun getCurrentViewModel(): EventViewModel {
         return obtainViewModel(EventViewModel::class.java)
@@ -58,14 +59,22 @@ class EventFragment : Fragment() {
     private fun initQrAdapter() {
         context?.let {
             qrsList.clear()
+
             qrAdapter =  QrCodesAdapter(it)
             qrsList.add(QrCodeModel())
             qrAdapter.items = qrsList
             recyclerViewQrCodes.visibility = View.VISIBLE
             recyclerViewQrCodes.adapter  = qrAdapter
+            i++
             qrAdapter.actionBuyMoreDetails = {
-                qrsList.add(QrCodeModel())
-                qrAdapter.notifyItemInserted(qrAdapter.itemCount)
+                if (qrAdapter.itemCount < 9) {
+                    qrsList.add(QrCodeModel(id = i.toString()))
+                    i++
+                    qrAdapter.notifyItemInserted(qrAdapter.itemCount)
+                }
+            }
+            qrAdapter.actionToQrCodeDetails = {
+
             }
         }
     }
