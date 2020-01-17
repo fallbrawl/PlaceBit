@@ -2,7 +2,6 @@ package com.example.placebit.ui.events.eventScreen
 
 
 import android.os.Bundle
-
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,8 @@ import android.view.ViewGroup
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView.ItemAnimator
+import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.transition.Slide
 import androidx.transition.Transition
 import androidx.transition.TransitionManager
@@ -32,11 +33,8 @@ class EventFragment : Fragment() {
     }
 
     private fun addATicket() {
-        qrsList.add(QrCodeModel())
-        qrAdapter.items = qrsList
-        recyclerViewQrCodes.visibility = View.VISIBLE
-        recyclerViewQrCodes.adapter  = qrAdapter
-//        qrAdapter.notifyDataSetChanged()
+
+
     }
 
     override fun onCreateView(
@@ -57,21 +55,30 @@ class EventFragment : Fragment() {
         buyTicketContainer.visibility = if (container) View.VISIBLE else View.GONE
     }
 
+    private fun initQrAdapter() {
+        context?.let {
+            qrsList.clear()
+            qrAdapter =  QrCodesAdapter(it)
+            qrsList.add(QrCodeModel())
+            qrAdapter.items = qrsList
+            recyclerViewQrCodes.visibility = View.VISIBLE
+            recyclerViewQrCodes.adapter  = qrAdapter
+            qrAdapter.actionBuyMoreDetails = {
+                qrsList.add(QrCodeModel())
+                qrAdapter.notifyItemInserted(qrAdapter.itemCount)
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity?)!!.supportActionBar!!.hide()
         (activity as MainActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        context?.let {
-            qrAdapter =  QrCodesAdapter(it)
-        }
+        initQrAdapter()
 
 
         buttonBuy.setOnClickListener {
             toggleBuyContainer()
-        }
-
-        constraintLayoutBuyMoreButton.setOnClickListener {
-            addATicket()
         }
 
         imageViewBack.setOnClickListener {
