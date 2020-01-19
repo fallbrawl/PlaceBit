@@ -37,9 +37,6 @@ class EventsListFragment : Fragment(), Toolbar.OnMenuItemClickListener {
         filterContainer.visibility = if (toggle) View.VISIBLE else View.GONE
     }
 
-
-
-
     override fun onMenuItemClick(p0: MenuItem?): Boolean {
         when (p0?.itemId) {
             R.id.action_search ->

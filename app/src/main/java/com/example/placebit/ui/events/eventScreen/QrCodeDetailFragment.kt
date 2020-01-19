@@ -5,41 +5,45 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.placebit.R
-import kotlinx.android.synthetic.main.item_qr_fragment.*
+import com.example.placebit.data.model.QrCodeModel
+import kotlinx.android.synthetic.main.fragment_qr_code_detail.*
 
-const val ARGUMENT_PAGE_NUMBER = "arg_page_number"
-class QrCodeDetailFragment:Fragment() {
+const val QR = "arg_page_number"
 
-    var pageNumber = 0
+class QrCodeDetailFragment : Fragment() {
 
-    fun newInstance(page: Int): QrCodeDetailFragment? {
-        val pageFragment = QrCodeDetailFragment()
-        val arguments = Bundle()
-        arguments.putInt(ARGUMENT_PAGE_NUMBER, page)
-        pageFragment.arguments = arguments
-        return pageFragment
+    lateinit var qr:QrCodeModel
+
+    companion object {
+        fun newInstance(qr: QrCodeModel): QrCodeDetailFragment {
+            val pageFragment = QrCodeDetailFragment()
+            val arguments = Bundle()
+            arguments.putSerializable(QR, qr)
+            pageFragment.arguments = arguments
+            return pageFragment
+        }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.getInt(ARGUMENT_PAGE_NUMBER)?.let {
-            pageNumber = it
+        arguments?.getSerializable(QR)?.let {
+            qr = it as QrCodeModel
         }
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        textViewQrNumber.text = "Page $pageNumber"
+        textViewQrNumber.text = "Ticket ${qr.id}"
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_qr_details, container,false)
+        return inflater.inflate(R.layout.fragment_qr_pager, container, false)
     }
 }

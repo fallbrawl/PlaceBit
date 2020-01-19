@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView.ItemAnimator
 import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.transition.Slide
@@ -31,11 +32,6 @@ class EventFragment : Fragment() {
 
     private fun getCurrentViewModel(): EventViewModel {
         return obtainViewModel(EventViewModel::class.java)
-    }
-
-    private fun addATicket() {
-
-
     }
 
     override fun onCreateView(
@@ -73,8 +69,16 @@ class EventFragment : Fragment() {
                     qrAdapter.notifyItemInserted(qrAdapter.itemCount)
                 }
             }
-            qrAdapter.actionToQrCodeDetails = {
+            qrAdapter.actionToQrCodeDetails = {clickedQrCode ->
 
+                val bundle = Bundle()
+                bundle.putString(QrCodesPagerFragment.POSITION, clickedQrCode.id)
+                qrsList.removeAt(0)
+                bundle.putSerializable(QrCodesPagerFragment.QRS, qrsList)
+                view?.findNavController()?.navigate(
+                    R.id.action_eventFragment_to_qrPagerFragment,
+                    bundle
+                )
             }
         }
     }

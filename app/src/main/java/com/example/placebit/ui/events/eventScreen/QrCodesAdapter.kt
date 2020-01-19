@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -83,7 +84,11 @@ class QrCodesAdapter(var context: Context) :
                 }
             }
             QR_CODE -> {
-                (holder as QrCodesItemsAdapterViewHolder).ticketNumber.text = position.toString()
+
+                (holder as QrCodesItemsAdapterViewHolder).qrContain.setOnClickListener {
+                    actionToQrCodeDetails.invoke(items[position])
+                }
+                holder.ticketNumber.text = position.toString()
 
                 items[position].qrCode.let {
                     Glide.with(context)
@@ -101,6 +106,7 @@ class QrCodesAdapter(var context: Context) :
 
         val qrCode: ImageView = itemView.imageViewQrCode
         val ticketNumber: TextView = itemView.textViewNumber
+        val qrContain: LinearLayout = itemView.qrContain
 
     }
 
