@@ -2,7 +2,6 @@ package com.example.placebit.ui.events.eventScreen
 
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +9,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.RecyclerView.ItemAnimator
-import androidx.recyclerview.widget.SimpleItemAnimator
-import androidx.transition.Slide
-import androidx.transition.Transition
-import androidx.transition.TransitionManager
 import com.example.placebit.R
 import com.example.placebit.data.model.QrCodeModel
 import com.example.placebit.extensions.obtainViewModel
 import com.example.placebit.ui.MainActivity
+import com.example.placebit.ui.events.eventScreen.qrGallery.QrGalleryFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_event.*
 
@@ -45,10 +40,10 @@ class EventFragment : Fragment() {
     private fun toggleBuyContainer() {
         buttonBuy.visibility = View.GONE
         container = container.not()
-        val transition: Transition = Slide(Gravity.TOP)
-        transition.duration = 600
-        transition.addTarget(R.id.buyTicketContainer)
-        TransitionManager.beginDelayedTransition(motion, transition)
+//        val transition: Transition = Slide(Gravity.TOP)
+//        transition.duration = 600
+//        transition.addTarget(R.id.buyTicketContainer)
+//        TransitionManager.beginDelayedTransition(motion, transition)
         buyTicketContainer.visibility = if (container) View.VISIBLE else View.GONE
     }
 
@@ -56,27 +51,28 @@ class EventFragment : Fragment() {
         context?.let {
             qrsList.clear()
 
-            qrAdapter =  QrCodesAdapter(it)
+            qrAdapter = QrCodesAdapter(it)
             qrsList.add(QrCodeModel())
             qrAdapter.items = qrsList
             recyclerViewQrCodes.visibility = View.VISIBLE
-            recyclerViewQrCodes.adapter  = qrAdapter
+            recyclerViewQrCodes.adapter = qrAdapter
             i++
             qrAdapter.actionBuyMoreDetails = {
                 if (qrAdapter.itemCount < 9) {
                     qrsList.add(QrCodeModel(id = i.toString()))
                     i++
-                    qrAdapter.notifyItemInserted(qrAdapter.itemCount)
+                    qrAdapter.notifyDataSetChanged()
                 }
             }
-            qrAdapter.actionToQrCodeDetails = {clickedQrCode ->
+            qrAdapter.actionToQrCodeDetails = { clickedQrCode ->
 
                 val bundle = Bundle()
-                bundle.putString(QrCodesPagerFragment.POSITION, clickedQrCode.id)
+                bundle.putInt(QrGalleryFragment.POSITION, clickedQrCode.id.toInt())
                 qrsList.removeAt(0)
-                bundle.putSerializable(QrCodesPagerFragment.QRS, qrsList)
+                bundle.putSerializable(QrGalleryFragment.QRS, qrsList)
+
                 view?.findNavController()?.navigate(
-                    R.id.action_eventFragment_to_qrPagerFragment,
+                    R.id.action_eventFragment_to_qrGalleryFragment,
                     bundle
                 )
             }
@@ -88,7 +84,7 @@ class EventFragment : Fragment() {
         (activity as MainActivity?)!!.supportActionBar!!.hide()
         (activity as MainActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         initQrAdapter()
-
+        buyTicketContainer.visibility = if (container) View.VISIBLE else View.GONE
 
         buttonBuy.setOnClickListener {
             toggleBuyContainer()
@@ -109,7 +105,7 @@ class EventFragment : Fragment() {
         }
 
         getCurrentViewModel().apply {
-            state.observe(this@EventFragment, Observer {
+            state.observe(viewLifecycleOwner, Observer {
 
             })
         }

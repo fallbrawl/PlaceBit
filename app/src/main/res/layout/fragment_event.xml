@@ -291,7 +291,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/recyclerViewQrCodes"
                         app:srcCompat="@drawable/bg_dashed_line" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.motion.widget.MotionLayout>

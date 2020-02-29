@@ -97,7 +97,8 @@ class QrCodesAdapter(var context: Context) :
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .transform(CenterCrop(), RoundedCorners(10)).fitCenter()
-                        .into(holder.qrCode)                }
+                        .into(holder.qrCode)
+                }
             }
         }
     }

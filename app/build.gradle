@@ -76,7 +76,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.drawerlayout:drawerlayout:1.0.0"
@@ -101,6 +101,10 @@ dependencies {
     // Gson
     implementation "com.google.code.gson:gson:${rootProject.ext.gson}"
 
+    //PagerIndicator
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofit}"
     implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.login_interceptor}"
@@ -109,8 +113,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofit}"
     implementation "com.basgeekball:awesome-validation:${rootProject.ext.awesomeValidation}"
     implementation 'com.github.nikartm:image-support:1.0.5'
-
-    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
 
     implementation "com.annimon:stream:${rootProject.ext.stream}"
 
